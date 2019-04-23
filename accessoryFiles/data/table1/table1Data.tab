@@ -1,0 +1,16 @@
+stage	replicate	type	antibody	purity	DNA
+LE	R1	H3K4me3	EpiCypher	96.9	2398
+LE	R2	H3K4me3	EpiCypher	95.3	805
+LE	R2	abK4me	Abcam	95.3	805
+ZY	R1	H3K4me3	EpiCypher	79.7	2688
+ZY	R2	H3K4me3	EpiCypher	64.6	755
+ZY	R2	abK4me	Abcam	64.6	755
+EP	R1	H3K4me3	EpiCypher	81.6	1793
+EP	R2	H3K4me3	EpiCypher	89.5	4585
+EP	R2	abK4me	Abcam	85.2	960
+LP	R1	H3K4me3	EpiCypher	84.1	4936
+LP	R2	H3K4me3	EpiCypher	71.3	915
+LP	R2	abK4me	Abcam	71.3	915
+DI	R1	H3K4me3	EpiCypher	88.7	6502
+DI	R2	H3K4me3	EpiCypher	82.3	1115
+DI	R2	abK4me	Abcam	82.3	1115

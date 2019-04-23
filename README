@@ -1,0 +1,138 @@
+PREREQUISITES: 
+The pipeline is configured to run on a SLURM based cluster with modules. The pipeline is built in nextflow (nextflow.io). It has been tested using nextflow/0.30.2. Earlier versions of nextflow will not work.
+This pipeline should run on other system architectures, but will require some customization.
+
+Modules / Software versions:
+R/3.5.2
+bamtools/2.5.1
+bedtools/2.27.1
+deeptools/3.0.1
+kallisto/0.45.0
+macs/2.1.2
+meme/5.0.1
+nextflow/0.30.2
+picard/2.17.11
+picard/2.9.2
+samtools/1.8
+samtools/1.9
+sratoolkit/2.9.2
+ucsc/373
+
+R packages:
+corrplot
+data.table
+dplyr
+extrafont
+factoextra
+ggcorrplot
+ggfortify
+ggplot2
+ggpmisc
+ggpubr
+ggrepel
+grid
+gridExtra
+leaps
+lsr
+numform
+pROC
+plyr
+png
+preprocessCore
+purrr
+reshape2
+scales
+tictoc
+ShortRead
+
+REQUIRED FILES:
+This folder contains the accessory data required to run the pipeline.
+
+In addition to these files, the pipeline requires aligned BAM files (tested only with BWA 0.7.12 alignment) as follows:
+
+Nomenclature for aligned BAM files:
+SS.RN.MMMMMM.anything.bam
+SS = stage (LE,ZY,EP,LP,DI)
+RN = round (R1, R2)
+MMMMMM = histone modification name (must be exactly as below (case sensitive))
+* Note: the names should be retained from the fastq.gz files in the GEO record (GSM121760)
+
+Aligned bam files should be located in the following folders:
+/data/timeCourse
+** These files should be aligned to the mm10 genome with K-MetStat panel sequences included.
+** This genome can be obtained using the genomeFiles/getGenomeFiles.sh script
+DI.R1.H3K4me3.ChIPSeq.mm10_KmetStat.bam
+DI.R1.H3K9Ac.ChIPSeq.mm10_KmetStat.bam
+DI.R1.input.ChIPSeq.mm10_KmetStat.bam
+DI.R2.H3K4me3.ChIPSeq.mm10_KmetStat.bam
+DI.R2.H3K9Ac.ChIPSeq.mm10_KmetStat.bam
+DI.R2.abK4me.ChIPSeq.mm10_KmetStat.bam
+DI.R2.input.ChIPSeq.mm10_KmetStat.bam
+EP.R1.H3K4me3.ChIPSeq.mm10_KmetStat.bam
+EP.R1.H3K9Ac.ChIPSeq.mm10_KmetStat.bam
+EP.R1.input.ChIPSeq.mm10_KmetStat.bam
+EP.R2.H3K4me3.ChIPSeq.mm10_KmetStat.bam
+EP.R2.H3K9Ac.ChIPSeq.mm10_KmetStat.bam
+EP.R2.abK4me.ChIPSeq.mm10_KmetStat.bam
+EP.R2.input.ChIPSeq.mm10_KmetStat.bam
+LE.R1.H3K4me3.ChIPSeq.mm10_KmetStat.bam
+LE.R1.H3K9Ac.ChIPSeq.mm10_KmetStat.bam
+LE.R1.input.ChIPSeq.mm10_KmetStat.bam
+LE.R2.H3K4me3.ChIPSeq.mm10_KmetStat.bam
+LE.R2.H3K9Ac.ChIPSeq.mm10_KmetStat.bam
+LE.R2.abK4me.ChIPSeq.mm10_KmetStat.bam
+LE.R2.input.ChIPSeq.mm10_KmetStat.bam
+LP.R1.H3K4me3.ChIPSeq.mm10_KmetStat.bam
+LP.R1.H3K9Ac.ChIPSeq.mm10_KmetStat.bam
+LP.R1.input.ChIPSeq.mm10_KmetStat.bam
+LP.R2.H3K4me3.ChIPSeq.mm10_KmetStat.bam
+LP.R2.H3K9Ac.ChIPSeq.mm10_KmetStat.bam
+LP.R2.abK4me.ChIPSeq.mm10_KmetStat.bam
+LP.R2.input.ChIPSeq.mm10_KmetStat.bam
+ZY.R1.H3K4me3.ChIPSeq.mm10_KmetStat.bam
+ZY.R1.H3K9Ac.ChIPSeq.mm10_KmetStat.bam
+ZY.R1.input.ChIPSeq.mm10_KmetStat.bam
+ZY.R2.H3K4me3.ChIPSeq.mm10_KmetStat.bam
+ZY.R2.H3K9Ac.ChIPSeq.mm10_KmetStat.bam
+ZY.R2.abK4me.ChIPSeq.mm10_KmetStat.bam
+ZY.R2.input.ChIPSeq.mm10_KmetStat.bam
+
+/data/histmods:
+H3K27ac_SCP3pos_H1Tneg.bam
+H3K27me1_SCP3pos_H1Tneg.bam
+H3K27me3_SCP3pos_H1Tneg.bam
+H3K36me3_SCP3pos_H1Tneg.bam
+H3K4ac_SCP3pos_H1Tneg.bam
+H3K4me1_SCP3pos_H1Tneg.bam
+H3K4me2_SCP3pos_H1Tneg.bam
+H3K79me1_SCP3pos_H1Tneg.bam
+H3K79me3_SCP3pos_H1Tneg.bam
+H3K9ac_SCP3pos_H1Tneg.bam
+H3K9me2_SCP3pos_H1Tneg.bam
+H3K9me3_SCP3pos_H1Tneg.bam
+H3_SCP3pos_H1Tneg.bam
+H4K12ac_SCP3pos_H1Tneg.bam
+H4K20me3_SCP3pos_H1Tneg.bam
+H4K8ac_SCP3pos_H1Tneg.bam
+H4ac5_SCP3pos_H1Tneg.bam
+IgG_SCP3pos_H1Tneg.bam
+Input_SCP3pos_H1Tneg.bam
+abK4me_SCP3pos_H1Tneg.bam
+*NOTE: H3K4me3_SCP3pos_H1Tneg.bam will be built from ZY.R1.H3K4me3 bam file
+
+RUNNING THE PIPELINE:
+nextflow run -with-timeline
+             -with-trace
+             -with-report
+             -c {accessoryFilesFolder}/nextflowConfig/nextflow.config
+             {accessoryFilesFolder}/scripts/analyticPipe_LamEtAl_NatComm2019.groovy
+             --projectdir    {project folder <<FULL PATH>>}
+             --outdir        {output folder  <<FULL PATH>>}
+             --timecoursedir {timecourse BAM folder <<FULL PATH>>}
+             --allHMdir      {SCP3pos H1tneg histone modifications BAM folder <<FULL PATH>>}
+
+{accessoryFilesFolder}      : downloaded folder with accessory files (location of this README)
+{project folder}            : parent folder of {accessoryFilesFolder}
+{output folder}             : location for output files
+{timeCourse BAM folder}     : location of all aligned BAM files from experiments in 5 MPI populations (see above)
+{SCP3pos H1tneg BAM folder} : location of all aligned BAM files from experiments in SCP3pos H1tneg nuclei (see above)

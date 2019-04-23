@@ -1,0 +1,56 @@
+## Temp files
+*~
+
+## Remove all hidden files except .gitignore 
+.*
+!.gitignore
+
+## Nextflow files
+.next*
+
+## Nextflow folders
+**_nxf_*
+
+## Nextflow reports & scripts
+nxf*sh
+trace*
+timeline*
+report*
+
+## Crap
+?.?
+
+## Slurm files
+slurm*out
+swarm*.?
+
+## Test pipeline work folders
+**/work*
+
+## PL OUT FOLDERS
+**/forPaper*
+
+## LEFTOVER TIMECOURSE FILES
+**/finalTimeCourse*
+**/allHistoneMods*
+
+## Trash (should not be needed ... just being careful)
+.Trash-*
+
+## SELECT SCRIPTS
+plotFigure3_Final.R
+sortingPaper_Figure4.R
+
+## BAM files
+*bam
+*bai
+
+## GENOME FILES
+mm*fa
+mm*fai
+
+## FASTQ FILES
+*fastq.gz
+*fastq
+*fq.gz
+*fq
