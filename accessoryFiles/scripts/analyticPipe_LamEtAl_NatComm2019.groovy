@@ -1294,8 +1294,8 @@ process runNCIScorrection_allHMs {
   def bgI    = bam.name.replaceFirst(".bam" ,".input.NCIS.ws25bp.bedgraph")
   def bwI    = bam.name.replaceFirst(".bam" ,".input.NCIS.ws25bp.bigwig")
   """
-  bedtools bamtobed -i ${bam}  >${bed}
-  bedtools bamtobed -i ${bamI} >${bedI}
+  bedtools bamtobed -i ${bam} |grep -P \'chr[0123456789]+\' >${bed}
+  bedtools bamtobed -i ${bamI} |grep -P \'chr[0123456789XY]+\' >${bedI}
 
   grep -w chr1 ${bed}  >chip.bed
   grep -w chr1 ${bedI} >input.bed
@@ -2056,9 +2056,12 @@ process makeRPKMhistoneBigWigs{
   clusterOptions ' --gres=lscratch:40'
   echo true
   cpus 16
-  memory '16g'
+  memory '32g'
 
-  time { 4.hour * task.attempt }
+  time { 6.hour * task.attempt }
+  errorStrategy { 'retry' }
+  maxRetries 3
+
   tag  {bam}
 
   module 'deeptools/3.0.1'
