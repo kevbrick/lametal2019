@@ -2143,7 +2143,7 @@ process makeHeatmapsForHistoneModsSuppFig{
   module 'bedtools/2.27.1'
   module 'ucsc/373'
 
-  publishDir params.outdirImages, mode: 'copy', overwrite: true, pattern: "*png"
+  //publishDir params.outdirImages, mode: 'copy', overwrite: true, pattern: "*png"
   publishDir params.outdirTables, mode: 'copy', overwrite: true, pattern: "*matrix.gz"
 
   input:
@@ -2177,7 +2177,7 @@ process makeHeatmapsForHistoneModsSuppFig{
   """
   }
 
-Channel.from( ["set1","abK4me" ,"H3K9ac"  ,"H3K36me3","H3K4me2","H3K4me1"],
+Channel.from( ["set1","H3K4me3" ,"H3K9ac"  ,"H3K36me3","H3K4me2","H3K4me1"],
               ["set2","H3K27ac" ,"H4ac5"   ,"H4K20me3","H4K12ac","H4K8ac"],
               ["set3","H3K79me1","H3K27me3","H3K79me3","H3K4ac" ,"H3K27me1"],
               ["set4","H3K9me3" ,"H3K9me2" ,"H3"      ,"Input"  ,"IgG"])
@@ -2196,7 +2196,7 @@ process makeHeatmapsForHistoneMods{
   module 'deeptools/3.0.1'
   module 'bedtools/2.27.1'
 
-  publishDir params.outdirImages, mode: 'copy', overwrite: true
+  publishDir params.outdirImages, mode: 'copy', overwrite: true, pattern: "*gz"
 
   input:
   set val(nSet), val(hm1), val(hm2), val(hm3), val(hm4), val(hm5) from hm4heatmaps
