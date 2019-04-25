@@ -120,7 +120,19 @@ Input_SCP3pos_H1Tneg.bam
 abK4me_SCP3pos_H1Tneg.bam
 *NOTE: H3K4me3_SCP3pos_H1Tneg.bam will be built from ZY.R1.H3K4me3 bam file
 
+Genome files: 
+The pipeline requires the following files in the accessoryFiles/genomeFiles folder:
+mm10_genome.fa
+mm10_genome.fa.fai
+mm10_KmetStat_genome.fa
+mm10_KmetStat_genome.fa.fai
+
+These files can be generated using the following script: 
+accessoryFiles/genomeFiles/getGenomeFiles.sh
+
+----------------------------------------------------------------------------------------------
 RUNNING THE PIPELINE:
+----------------------------------------------------------------------------------------------
 nextflow run -with-timeline
              -with-trace
              -with-report
