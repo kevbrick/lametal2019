@@ -45,6 +45,10 @@ scales
 tictoc
 ShortRead
 
+SYSTEM REQUIREMENTS:
+~1Tb free space; Pipe will generate generate up to 1 Tb of temp files. 
+Other requirements are encoded in nextflow processes. 
+
 REQUIRED FILES:
 This folder contains the accessory data required to run the pipeline.
 
