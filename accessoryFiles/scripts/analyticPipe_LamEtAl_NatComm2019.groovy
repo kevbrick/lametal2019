@@ -2340,6 +2340,37 @@ process drawFigure3{
   """
   }
 
+process drawFigureS4{
+  scratch '/lscratch/$SLURM_JOBID'
+  clusterOptions ' --gres=lscratch:40'
+  echo true
+  cpus 1
+  memory '8g'
+
+  time { 1.hour }
+  tag  { "Drawing Figure S4" }
+
+  module 'R/3.5.2'
+
+  publishDir params.outdirImages, mode: 'copy', overwrite: true
+
+  input:
+  file(f3IsDone)   from figure3PDFs.collect()
+
+  output:
+  file "*png"    into figureS4PNGs
+  file "*pdf"    into figureS4PDFs
+
+  script:
+  """
+  ## Add globals to .Renviron (so we can see them inside R!)
+  echo KBPIPEOUTDIR="${params.outdir}/"      >>~/.Renviron
+  echo KBPIPEWORKDIR="${params.projectdir}/" >>~/.Renviron
+
+  R --no-save --no-site-file --no-init-file --no-restore --silent --slave <${params.codeRdir}/sortingPaper_FigureS4_allHMs.R ||true
+  """
+  }
+
 process drawKmetStatFig{
   scratch '/lscratch/$SLURM_JOBID'
   clusterOptions ' --gres=lscratch:40'
@@ -2460,6 +2491,7 @@ process drawFigureS5{
 //     file failte2 from k4me3TableForR
 //     file failtg  from figure3PNGs
 //     file failth  from figure4PNGs
+//     file failtSh from figureS4PNGs
 //     file failti  from figureS5PNGs
 //
 //

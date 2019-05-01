@@ -295,11 +295,11 @@ gBoxPlot <- ggplot(pHS$dDist,aes(x=1,y=mid/flank,fill=stage)) +
         axis.text.x=element_blank(),
         axis.ticks.x = element_blank()) + 
   xlab('Meiosis stage') + 
-  ylab('H3K9Ac signal (A.U.)') + facet_grid(~stage)
+  ylab('H3K9ac signal (A.U.)') + facet_grid(~stage)
 
 myHM <- pHS$figHM + 
   scale_fill_gradientn(colors=c('white','grey80','black','red','firebrick'),values=c(0,.2,.5,.7,1)) + 
-  ylab('H3K9Ac signal\nat DSB hotspots') + 
+  ylab('H3K9ac signal\nat DSB hotspots') + 
   scale_x_continuous(breaks=c(-2,0,2)) + 
   coord_cartesian(xlim=c(-2.5,2.5))
 
